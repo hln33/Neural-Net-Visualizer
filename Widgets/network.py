@@ -2,21 +2,18 @@ import uuid
 import networkx as nx
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
-from PyQt6.QtWidgets import *
-from PyQt6.QtGui import *
-
 class Network(FigureCanvas):
     def __init__(self, graph, figure):
-        super(Network, self).__init__()
+        super().__init__()
 
         self.graph = graph
         self.figure = figure
         self.layers = []
+
         self._draw_network()
 
     def _draw_network(self):
         self._clear_network()
-
         self._add_nodes()
         self._add_edges()
 
@@ -32,7 +29,7 @@ class Network(FigureCanvas):
         self.layers.append(newLayer)
         self._draw_network()
     
-    def remove_layer(self):
+    def remove_layer(self, i):
         pass
 
     def _generate_node_id(self):

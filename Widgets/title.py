@@ -3,7 +3,7 @@ from PyQt6.QtCore import *
 
 class Title(QWidget):
     def __init__(self, title_text):
-        super(Title, self).__init__()
+        super().__init__()
 
         layout = QHBoxLayout()
         self.setLayout(layout)
