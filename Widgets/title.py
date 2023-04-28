@@ -11,4 +11,3 @@ class Title(QWidget):
         title = QLabel(title_text)
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(title)
-
