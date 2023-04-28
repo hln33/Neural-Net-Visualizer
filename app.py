@@ -1,7 +1,12 @@
 import sys
+import time
+
 from Widgets.title import Title
 from Widgets.network import Network
+
 from PyQt6.QtWidgets import *
+import matplotlib.pyplot as plt
+import networkx as nx
 
 # constants
 _APP_NAME = "Neural Network"
@@ -11,9 +16,12 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle(_APP_NAME)
-
         title_widget = Title(_APP_NAME)
-        neural_net_widget = Network()
+        neural_net_widget = Network(nx.Graph(), plt.figure())
+        
+        neural_net_widget.add_layer(3)
+        neural_net_widget.add_layer(3)
+        neural_net_widget.add_layer(3)
 
         layout = QVBoxLayout()
         layout.addWidget(title_widget)
@@ -22,7 +30,6 @@ class MainWindow(QMainWindow):
         content = QWidget()
         content.setLayout(layout)
         self.setCentralWidget(content)
-
 
 app = QApplication(sys.argv)
 

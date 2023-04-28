@@ -1,26 +1,22 @@
+import uuid
 import networkx as nx
-
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 
 class Network(FigureCanvas):
-    def __init__(self):
+    def __init__(self, graph, figure):
         super(Network, self).__init__()
 
-        self.graph = nx.Graph()
-
+        self.graph = graph
+        self.figure = figure
         self.layers = []
-        self.layers.append([1, 2, 3, 4])
-        self.layers.append(['a', 'b', 'c', 'd', 'e'])
+        self._draw_network()
 
-        self.figure = plt.figure()
-        self._plot_graph()
+    def _draw_network(self):
+        self._clear_network()
 
-    def _plot_graph(self):
-        self.figure.clf()
         self._add_nodes()
         self._add_edges()
 
@@ -28,11 +24,19 @@ class Network(FigureCanvas):
         nx.draw(self.graph, pos=pos, with_labels=False)
         self.draw_idle()
     
+    def _clear_network(self):
+        self.figure.clf()
+    
+    def add_layer(self, size):
+        newLayer = [self._generate_node_id() for _ in range(size)]
+        self.layers.append(newLayer)
+        self._draw_network()
+    
     def remove_layer(self):
         pass
-    
-    def add_layer(self):
-        pass
+
+    def _generate_node_id(self):
+        return str(uuid.uuid4())
 
     def _get_node_positions(self):
         pos = dict()
@@ -46,8 +50,10 @@ class Network(FigureCanvas):
             self.graph.add_nodes_from(layer, bipartite=i)
 
     def _add_edges(self):
-        for i in range(len(self.layers)):
-            isLastLayer = (i == (len(self.layers) - 1))
+        numLayers = len(self.layers)
+
+        for i in range(numLayers):
+            isLastLayer = (i == (numLayers - 1))
             if isLastLayer:
                 break
 
