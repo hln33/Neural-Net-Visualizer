@@ -52,6 +52,6 @@ class NeuralNetwork(FigureCanvas):
     def _add_edges(self) -> None:
         edges = self.model.edges
         
-        for x, y in edges:
-            self.graph.add_edge(x, y)
+        for node1, node2 in edges:
+            self.graph.add_edge(node1, node2)
             

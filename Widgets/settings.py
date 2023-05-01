@@ -1,3 +1,6 @@
+from tkinter import Widget
+from Widgets.neuralNet import NeuralNetwork
+
 from PyQt6.QtWidgets import *
 
 # constants
@@ -5,7 +8,7 @@ MIN_LAYER_SIZE = 1
 MAX_LAYER_SIZE = 10
 
 class Settings(QWidget):
-    def __init__(self, network) -> None:
+    def __init__(self, network: NeuralNetwork) -> None:
         super().__init__()
         
         self.network = network
@@ -27,5 +30,5 @@ class Settings(QWidget):
     def _add_network_layer(self) -> None:
         self.network.add_layer(self.new_Layer_size)
     
-    def _set_new_layer_size(self, size) -> None:
+    def _set_new_layer_size(self, size: int) -> None:
         self.new_Layer_size = size

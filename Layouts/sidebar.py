@@ -6,3 +6,4 @@ class Sidebar(QVBoxLayout):
 
         self.addWidget(title)
         self.addWidget(settings)
+        

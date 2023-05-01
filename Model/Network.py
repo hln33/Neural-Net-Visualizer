@@ -3,15 +3,15 @@ from Model.Layer import Layer
 
 class Network():
     def __init__(self) -> None:
-        self._layers = []
-        self._edges = []
+        self._layers: list[Layer] = []
+        self._edges: list[(Node, Node)] = []
     
     @property
     def layers(self) -> list[Layer]:
         return self._layers
     
     @property
-    def edges(self) -> list[(str, str)]:
+    def edges(self) -> list[(Node, Node)]:
         return self._edges
 
     def add_edges(self) -> None:
@@ -43,10 +43,10 @@ class Network():
     def remove_layer(self) -> None:
         pass
 
-    def get_node_positions(self) -> None:
+    def get_node_positions(self) -> dict[Node, (int, int)]:
         nodePos = dict()
-        for layerNum, layer in enumerate(self._layers):
-            nodePos.update((node, (layerNum, nodeNum)) for nodeNum, node in enumerate(layer.nodes))
+        for x, layer in enumerate(self._layers):
+            nodePos.update((node, (x, y)) for y, node in enumerate(layer.nodes))
         
         return nodePos
     
