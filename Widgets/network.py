@@ -2,6 +2,9 @@ import uuid
 import networkx as nx
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
+# constants
+NODE_COLOR = 'black'
+
 class Network(FigureCanvas):
     def __init__(self, graph, figure):
         super().__init__()
@@ -17,8 +20,9 @@ class Network(FigureCanvas):
         self._add_nodes()
         self._add_edges()
 
-        pos = self._get_node_positions()
-        nx.draw(self.graph, pos=pos, with_labels=False)
+        node_positions = self._get_node_positions()
+        color_map = self._get_node_color_map(len(node_positions))
+        nx.draw(self.graph, node_color=color_map, pos=node_positions, with_labels=False)
         self.draw_idle()
     
     def _clear_network(self):
@@ -34,13 +38,21 @@ class Network(FigureCanvas):
 
     def _generate_node_id(self):
         return str(uuid.uuid4())
+    
+    def _get_node_color_map(self, num_nodes):
+        color_map = []
+        for _ in range(num_nodes):
+            color_map.append(NODE_COLOR)
+        
+        return color_map
+        
 
     def _get_node_positions(self):
-        pos = dict()
+        nodePos = dict()
         for layerNum, layer in enumerate(self.layers):
-            pos.update((node, (layerNum, nodeNum)) for nodeNum, node in enumerate(layer))
+            nodePos.update((node, (layerNum, nodeNum)) for nodeNum, node in enumerate(layer))
         
-        return pos
+        return nodePos
     
     def _add_nodes(self):
         for i, layer in enumerate(self.layers):
@@ -48,7 +60,6 @@ class Network(FigureCanvas):
 
     def _add_edges(self):
         numLayers = len(self.layers)
-
         for i in range(numLayers):
             isLastLayer = (i == (numLayers - 1))
             if isLastLayer:

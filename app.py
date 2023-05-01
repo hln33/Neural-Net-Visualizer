@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 # constants
-APP_NAME = "Neural Network"
+APP_NAME = "Neural Network Visualizer"
 
 class MainWindow(QMainWindow):
     def __init__(self):
