@@ -20,8 +20,8 @@ class NetworkConfig(QWidget):
         layer_size_picker.valueChanged.connect(self._set_new_layer_size)
 
         layout = QVBoxLayout()
-        layout.addWidget(add_layer_button)
         layout.addWidget(layer_size_picker)
+        layout.addWidget(add_layer_button)
         self.setLayout(layout)
 
     def _add_network_layer(self):

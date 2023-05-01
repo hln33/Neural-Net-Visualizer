@@ -1,4 +1,5 @@
 import sys
+from Layouts.sidebar import Sidebar
 
 from Widgets.title import Title
 from Widgets.network import Network
@@ -16,17 +17,18 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle(APP_NAME)
-        self.title = Title(APP_NAME)
-        self.neural_net = Network(nx.Graph(), plt.figure())
-        self.neural_net_config = NetworkConfig(self.neural_net)
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.title)
-        layout.addWidget(self.neural_net)
-        layout.addWidget(self.neural_net_config)
+        title = Title(APP_NAME)
+        neural_net = Network(nx.Graph(), plt.figure())
+        neural_net_config = NetworkConfig(neural_net)
+        sidebar = Sidebar(title, neural_net_config)
+
+        main_layout = QHBoxLayout()
+        main_layout.addLayout(sidebar)
+        main_layout.addWidget(neural_net)
 
         content = QWidget()
-        content.setLayout(layout)
+        content.setLayout(main_layout)
         self.setCentralWidget(content)
 
 app = QApplication(sys.argv)
