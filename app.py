@@ -2,8 +2,8 @@ import sys
 from Layouts.sidebar import Sidebar
 
 from Widgets.title import Title
-from Widgets.network import Network
-from Widgets.networkConfig import NetworkConfig
+from Widgets.neuralNet import NeuralNetwork
+from Widgets.settings import Settings
 
 from PyQt6.QtWidgets import *
 import matplotlib.pyplot as plt
@@ -19,8 +19,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(APP_NAME)
 
         title = Title(APP_NAME)
-        neural_net = Network(nx.Graph(), plt.figure())
-        neural_net_config = NetworkConfig(neural_net)
+        neural_net = NeuralNetwork(nx.Graph(), plt.figure())
+        neural_net_config = Settings(neural_net)
         sidebar = Sidebar(title, neural_net_config)
 
         main_layout = QHBoxLayout()

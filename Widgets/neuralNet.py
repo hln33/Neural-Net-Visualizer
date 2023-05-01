@@ -5,7 +5,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 # constants
 NODE_COLOR = 'black'
 
-class Network(FigureCanvas):
+class NeuralNetwork(FigureCanvas):
     def __init__(self, graph, figure):
         super().__init__()
 

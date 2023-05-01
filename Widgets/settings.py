@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import *
 MIN_LAYER_SIZE = 1
 MAX_LAYER_SIZE = 10
 
-class NetworkConfig(QWidget):
+class Settings(QWidget):
     def __init__(self, network):
         super().__init__()
         
