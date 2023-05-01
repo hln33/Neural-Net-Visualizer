@@ -5,7 +5,7 @@ MIN_LAYER_SIZE = 1
 MAX_LAYER_SIZE = 10
 
 class Settings(QWidget):
-    def __init__(self, network):
+    def __init__(self, network) -> None:
         super().__init__()
         
         self.network = network
@@ -24,8 +24,8 @@ class Settings(QWidget):
         layout.addWidget(add_layer_button)
         self.setLayout(layout)
 
-    def _add_network_layer(self):
+    def _add_network_layer(self) -> None:
         self.network.add_layer(self.new_Layer_size)
     
-    def _set_new_layer_size(self, size):
+    def _set_new_layer_size(self, size) -> None:
         self.new_Layer_size = size

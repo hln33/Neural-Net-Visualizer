@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 
 class Title(QWidget):
-    def __init__(self, title_text):
+    def __init__(self, title_text) -> None:
         super().__init__()
 
         layout = QHBoxLayout()

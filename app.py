@@ -1,6 +1,7 @@
 import sys
-from Layouts.sidebar import Sidebar
 
+from Model.Network import Network
+from Layouts.sidebar import Sidebar
 from Widgets.title import Title
 from Widgets.neuralNet import NeuralNetwork
 from Widgets.settings import Settings
@@ -13,13 +14,13 @@ import networkx as nx
 APP_NAME = "Neural Network Visualizer"
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.setWindowTitle(APP_NAME)
 
         title = Title(APP_NAME)
-        neural_net = NeuralNetwork(nx.Graph(), plt.figure())
+        neural_net = NeuralNetwork(nx.Graph(), plt.figure(), Network())
         neural_net_config = Settings(neural_net)
         sidebar = Sidebar(title, neural_net_config)
 
