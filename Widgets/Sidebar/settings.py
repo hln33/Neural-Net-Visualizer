@@ -1,4 +1,3 @@
-from tkinter import Widget
 from Widgets.neuralNet import NeuralNetwork
 
 from PyQt6.QtWidgets import *
@@ -6,6 +5,7 @@ from PyQt6.QtWidgets import *
 # constants
 MIN_LAYER_SIZE = 1
 MAX_LAYER_SIZE = 10
+ADD_LAYER_BUTTON_TEXT = "Add Layer"
 
 class Settings(QWidget):
     def __init__(self, network: NeuralNetwork) -> None:
@@ -14,7 +14,7 @@ class Settings(QWidget):
         self.network = network
         self.new_Layer_size = MIN_LAYER_SIZE
 
-        add_layer_button = QPushButton("Add Layer")
+        add_layer_button = QPushButton(ADD_LAYER_BUTTON_TEXT)
         add_layer_button.clicked.connect(self._add_network_layer)
 
         layer_size_picker = QSpinBox()
@@ -31,4 +31,7 @@ class Settings(QWidget):
         self.network.add_layer(self.new_Layer_size)
     
     def _set_new_layer_size(self, size: int) -> None:
+        assert size <= MAX_LAYER_SIZE, "layer size must be less than or equal max size"
+        assert size >= MIN_LAYER_SIZE, "layer size must be greater than or equal min size"
+
         self.new_Layer_size = size

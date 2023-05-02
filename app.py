@@ -1,12 +1,11 @@
 import sys
 
 from Model.Network import Network
-from Layouts.sidebar import Sidebar
-from Widgets.title import Title
+from Widgets.Sidebar.sidebar import Sidebar
 from Widgets.neuralNet import NeuralNetwork
-from Widgets.settings import Settings
 
 from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 import matplotlib.pyplot as plt
 import networkx as nx
 
@@ -19,14 +18,13 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle(APP_NAME)
 
-        title = Title(APP_NAME)
-        neural_net = NeuralNetwork(nx.Graph(), plt.figure(), Network())
-        neural_net_config = Settings(neural_net)
-        sidebar = Sidebar(title, neural_net_config)
+        model = Network()
+        graph = NeuralNetwork(nx.Graph(), plt.figure(), model)
+        sidebar = Sidebar(model, graph)
 
         main_layout = QHBoxLayout()
         main_layout.addLayout(sidebar)
-        main_layout.addWidget(neural_net)
+        main_layout.addWidget(graph)
 
         content = QWidget()
         content.setLayout(main_layout)

@@ -22,7 +22,7 @@ class NeuralNetwork(FigureCanvas):
         self._add_edges()
 
         node_positions = self.model.get_node_positions()
-        color_map = self._get_node_color_map(len(node_positions))
+        color_map = self._get_node_color_map()
         nx.draw(self.graph, node_color=color_map, pos=node_positions, with_labels=False)
         self.draw_idle()
     
@@ -36,10 +36,11 @@ class NeuralNetwork(FigureCanvas):
     def remove_layer(self, i) -> None:
         pass
 
-    def _get_node_color_map(self, num_nodes) -> list[str]:
+    def _get_node_color_map(self) -> list[str]:
         color_map = []
-        for _ in range(num_nodes):
-            color_map.append(NODE_COLOR)
+        for layer in self.model.layers:
+            for node in layer.nodes:
+                color_map.append(node.color)
         
         return color_map
     
