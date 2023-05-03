@@ -15,6 +15,9 @@ class Layer():
 
 
 class Network(Observerable):
+    # constants
+    NUM_LAYERS = "num_layers"
+
     def __init__(self) -> None:
         super().__init__()
 
@@ -31,7 +34,7 @@ class Network(Observerable):
     
     def notify_observers(self) -> None:
         self.update({
-            "num_layers" : len(self.layers),
+            self.NUM_LAYERS : len(self.layers),
         })
 
     def add_edges(self) -> None:
