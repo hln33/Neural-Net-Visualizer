@@ -9,40 +9,44 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 
-class Sidebar(QVBoxLayout):
+class Sidebar(QWidget):
     def __init__(self, model: Network, graph: NeuralNetwork) -> None:
         super().__init__()
 
-        self.addWidget(SettingsSection(graph))
-        self.addWidget(InfoSection(model))
+        layout = QVBoxLayout()
+        layout.addWidget(_SettingsSection(graph))
+        layout.addWidget(_InfoSection(model))
+        self.setLayout(layout)
 
 
-class SettingsSection(QWidget):
+class _SettingsSection(QWidget):
     def __init__(self, graph: NeuralNetwork):
         super().__init__()
 
         settings_layout = QVBoxLayout()
         settings_layout.addWidget(Title("Settings"))
         settings_layout.addWidget(Settings(graph.add_layer))
+
         self.setLayout(settings_layout)
 
 
-class InfoSection(QWidget):
+class _InfoSection(QWidget):
     def __init__(self, model: Network):
         super().__init__()
 
-        info_layout = QVBoxLayout()
+        layout = QGridLayout()
 
-        info_title = Title("Info")
-        info_title.setContentsMargins(0, 0, 0, 0)
-        info_title.setAutoFillBackground(True)
-        palette = info_title.palette()
-        palette.setColor(info_title.backgroundRole(), QColor('red'))
-        info_title.setPalette(palette)
+        title = Title("Info")
+        title.setAutoFillBackground(True)
+        palette = title.palette()
+        palette.setColor(title.backgroundRole(), QColor('red'))
+        title.setPalette(palette)
 
-        info_layout.addWidget(info_title)
-        info_layout.addWidget(NetworkInfo(model))
-        info_layout.setSpacing(0)
-        info_layout.setContentsMargins(0, 0, 0, 0)
+        info = NetworkInfo(model)
+        info.setContentsMargins(1, 1, 1, 1)
 
-        self.setLayout(info_layout)
+        layout.addWidget(title, 0, 0)
+        layout.addWidget(info, 1, 0)
+        layout.setSpacing(0)
+
+        self.setLayout(layout)

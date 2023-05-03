@@ -22,9 +22,10 @@ class Settings(QWidget):
         layer_size_picker.lineEdit().setReadOnly(True)
         layer_size_picker.valueChanged.connect(self._set_new_layer_size)
 
-        layout = QVBoxLayout()
-        layout.addWidget(layer_size_picker)
-        layout.addWidget(add_layer_button)
+        layout = QGridLayout()
+        layout.addWidget(layer_size_picker, 0, 0)
+        layout.addWidget(add_layer_button, 0, 1)
+        layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(layout)
 
     def _add_network_layer(self) -> None:

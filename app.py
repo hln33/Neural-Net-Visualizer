@@ -21,9 +21,10 @@ class MainWindow(QMainWindow):
         model = Network()
         graph = NeuralNetwork(nx.Graph(), plt.figure(), model)
         sidebar = Sidebar(model, graph)
+        sidebar.setFixedSize(250, 200)
 
         main_layout = QHBoxLayout()
-        main_layout.addLayout(sidebar)
+        main_layout.addWidget(sidebar)
         main_layout.addWidget(graph)
 
         content = QWidget()
