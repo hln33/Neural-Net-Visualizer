@@ -1,4 +1,4 @@
-from Widgets.neuralNet import NeuralNetwork
+from typing import Callable
 
 from PyQt6.QtWidgets import *
 
@@ -8,10 +8,10 @@ MAX_LAYER_SIZE = 10
 ADD_LAYER_BUTTON_TEXT = "Add Layer"
 
 class Settings(QWidget):
-    def __init__(self, network: NeuralNetwork) -> None:
+    def __init__(self, add_layer_func: Callable[[int], None]) -> None:
         super().__init__()
         
-        self.network = network
+        self.add_layer_func = add_layer_func
         self.new_Layer_size = MIN_LAYER_SIZE
 
         add_layer_button = QPushButton(ADD_LAYER_BUTTON_TEXT)
@@ -28,7 +28,7 @@ class Settings(QWidget):
         self.setLayout(layout)
 
     def _add_network_layer(self) -> None:
-        self.network.add_layer(self.new_Layer_size)
+        self.add_layer_func(self.new_Layer_size)
     
     def _set_new_layer_size(self, size: int) -> None:
         assert size <= MAX_LAYER_SIZE, "layer size must be less than or equal max size"

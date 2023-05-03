@@ -1,4 +1,4 @@
-from Model.Network import Network
+from Model.network import Network
 
 import networkx as nx
 from matplotlib.figure import Figure
@@ -10,10 +10,11 @@ NODE_COLOR = 'black'
 class NeuralNetwork(FigureCanvas):
     def __init__(self, graph: nx.Graph, figure: Figure, model: Network) -> None:
         super().__init__()
-
+        
         self.graph = graph
         self.figure = figure
         self.model = model
+
         self._draw_network()
 
     def _draw_network(self) -> None:
@@ -30,7 +31,7 @@ class NeuralNetwork(FigureCanvas):
         self.figure.clf()
     
     def add_layer(self, size) -> None:
-        self.model.add_layer(size, NODE_COLOR)
+        self.model.add_layer(size, NODE_COLOR)        
         self._draw_network()
     
     def remove_layer(self, i) -> None:

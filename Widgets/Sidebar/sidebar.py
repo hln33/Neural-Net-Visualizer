@@ -1,7 +1,7 @@
-from Model.Network import Network
+from Model.network import Network
 
-from Widgets.Sidebar.networkInfo import NetworkInfo
-from Widgets.Sidebar.settings import Settings
+from .networkInfo import NetworkInfo
+from .settings import Settings
 from Widgets.neuralNet import NeuralNetwork
 from Widgets.title import Title
 
@@ -11,11 +11,13 @@ from PyQt6.QtCore import *
 class Sidebar(QVBoxLayout):
     def __init__(self, model: Network, graph: NeuralNetwork) -> None:
         super().__init__()
+
+        model.register(self, None)
         
         settings_section = QWidget()
         settings_layout = QVBoxLayout()
         settings_layout.addWidget(Title("Settings"))
-        settings_layout.addWidget(Settings(graph))
+        settings_layout.addWidget(Settings(graph.add_layer))
         settings_section.setLayout(settings_layout)
 
         info_section = QWidget()

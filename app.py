@@ -1,6 +1,6 @@
 import sys
 
-from Model.Network import Network
+from Model.network import Network
 from Widgets.Sidebar.sidebar import Sidebar
 from Widgets.neuralNet import NeuralNetwork
 

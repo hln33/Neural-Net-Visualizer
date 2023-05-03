@@ -1,8 +1,20 @@
-from Model.Node import Node 
-from Model.Layer import Layer
+from .observer import Observerable
 
-class Network():
+class Node():
+    def __init__(self, color: str) -> None:
+        self.color = color    
+
+class Layer():
+    def __init__(self, nodes: list[Node]) -> None:
+        self._nodes = nodes
+    
+    @property
+    def nodes(self) -> list[Node]:
+        return self._nodes
+
+class Network(Observerable):
     def __init__(self) -> None:
+        super().__init__()
         self._layers: list[Layer] = []
         self._edges: list[(Node, Node)] = []
     
@@ -13,6 +25,11 @@ class Network():
     @property
     def edges(self) -> list[(Node, Node)]:
         return self._edges
+    
+    def notify_observers(self) -> None:
+        self.update({
+            "num_layers" : len(self.layers),
+        })
 
     def add_edges(self) -> None:
         numLayers = len(self._layers)
