@@ -2,11 +2,11 @@ from typing import Callable
 
 class Observerable:
     def __init__(self) -> None:
-        self.listener_callback = {}
+        self.callbacks = []
     
-    def register(self, listener, callback: Callable[[None], None]) -> None:
-        self.listener_callback[listener] = callback
+    def register(self, c: Callable[[None], None]) -> None:
+        self.callbacks.append(c)
     
     def update(self, event: dict) -> None:
-        for listener, callback in self.listener_callback.items():
-            callback(event)
+        for c in self.callbacks:
+            c(event)

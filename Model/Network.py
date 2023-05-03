@@ -4,17 +4,20 @@ class Node():
     def __init__(self, color: str) -> None:
         self.color = color    
 
+
 class Layer():
     def __init__(self, nodes: list[Node]) -> None:
         self._nodes = nodes
-    
+
     @property
     def nodes(self) -> list[Node]:
         return self._nodes
 
+
 class Network(Observerable):
     def __init__(self) -> None:
         super().__init__()
+
         self._layers: list[Layer] = []
         self._edges: list[(Node, Node)] = []
     
@@ -56,6 +59,8 @@ class Network(Observerable):
         newLayer = Layer(newNodes)
         self._layers.append(newLayer)
         self.add_edges()
+
+        self.notify_observers()
     
     def remove_layer(self) -> None:
         pass

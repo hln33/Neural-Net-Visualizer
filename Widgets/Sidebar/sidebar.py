@@ -12,7 +12,7 @@ class Sidebar(QVBoxLayout):
     def __init__(self, model: Network, graph: NeuralNetwork) -> None:
         super().__init__()
 
-        model.register(self, None)
+        model.register(self.update_stats)
         
         settings_section = QWidget()
         settings_layout = QVBoxLayout()
@@ -28,4 +28,6 @@ class Sidebar(QVBoxLayout):
 
         self.addWidget(settings_section)
         self.addWidget(info_section)
-        
+    
+    def update_stats(self, stats: dict):
+        print(stats)
