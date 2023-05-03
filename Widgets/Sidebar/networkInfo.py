@@ -10,10 +10,12 @@ class NetworkInfo(QWidget):
         model.register(self.update_stats)
 
         self.num_layers = QLabel("0")
+        #self.num_layers.setContentsMargins(0, 0, 0, 0)
     
-        layout = QVBoxLayout()
+        layout = QHBoxLayout()
         layout.addWidget(Title("Num Layers"))
         layout.addWidget(self.num_layers)
+        layout.setSpacing(0)
         self.setLayout(layout)
 
     def update_stats(self, stats: dict):
